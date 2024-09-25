@@ -22,10 +22,10 @@ jobs:
         distribution: 'temurin'
 
     - name: Build with Maven
-    - run: mvn package -DskipTests
-    - run: mkdir jar && cp target/*.jar jar
-    - run: mv jar/*.jar cadastros.jar
-    - uses:  actions/upload-artifact@v4
+      run: mvn package -DskipTests
+      run: mkdir jar && cp target/*.jar jar
+      run: mv jar/*.jar cadastros.jar
+      uses:  actions/upload-artifact@v4
       with:
         name: Package
         path: jar
