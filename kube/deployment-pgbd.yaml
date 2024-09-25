@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pgbd
+  labels:
+    app.kubernetes.io/name: pgbd
+spec:
+  containers:
+  - name: pgbd
+    image: postgres:12.19-alpine3.20
+    env:
+      - name: POSTGRES_DB
+        value: "ptransportes"
+      - name: POSTGRES_PASSWORD
+        value: "83226989"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgbd
+spec:
+  selector:
+    app.kubernetes.io/name: pgbd
+  ports:
+  - name: porta-database
+    protocol: TCP
+    port: 5432

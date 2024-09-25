@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  pgbd:
+    image: postgres:12.19-alpine3.20
+    restart: always
+    volumes:
+      - ./database:/var/lib/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 83226989
+      POSTGRES_DB: ptransportes
+
+  api:
+    image: ptransportes:0.3
+    restart: always
+    depends_on:
+      - pgbd
+    platform: linux/amd64
+    deploy:
+      mode: replicated
+      replicas: 3
+
+volumes:
+  database:
+    driver: flocker
+    driver_opts:
+      size: "10GiB"
