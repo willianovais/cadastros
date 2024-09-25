@@ -6,7 +6,7 @@ name: Build App Teste
 on: push
 
 jobs:
-  build:
+  buildapp:
 
     runs-on: ubuntu-latest
     permissions:
@@ -24,15 +24,32 @@ jobs:
     - name: Build with Maven
       run: mvn package -DskipTests
     - run: ls target
-    - run: mv target/*.jar cadastros.jar
+    - run: mkdir build
+    - run: cp target/*.jar build/cadastros.jar
       
     - uses:  actions/upload-artifact@v4
       with:
         name: Package
-        path: target
+        path: build
 
-    - name: dockerbuild
-      uses: docker/build-push-action@v6
-      with:
-        push: true
-        tags: willianovais/ptransportes:latest
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: willianovais/ptransportes:latest
