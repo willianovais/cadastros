@@ -23,14 +23,13 @@ jobs:
 
     - name: Build with Maven
       run: mvn package -DskipTests
-    - run: ls target 
-    - run: mkdir jar && ls jar && cp target/*.jar jar
-    - run: mv jar/*.jar cadastros.jar
+    - run: ls target
+    - run: mv target/*.jar cadastros.jar
       
     - uses:  actions/upload-artifact@v4
       with:
         name: Package
-        path: jar
+        path: target
 
     - name: dockerbuild
       uses: docker/build-push-action@v6
