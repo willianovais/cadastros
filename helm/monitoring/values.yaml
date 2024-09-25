@@ -64,4 +64,4 @@ write:
   replicas: 0
 
 singleBinary:
-  replicas: 0 
+  replicas: 1
