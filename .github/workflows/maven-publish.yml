@@ -33,6 +33,7 @@ jobs:
         path: build
 
   docker:
+    needs: buildapp
     runs-on: ubuntu-latest
     steps:
       -
