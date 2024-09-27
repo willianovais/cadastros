@@ -23,9 +23,9 @@ jobs:
 
     - name: Build Hexburguer Jar
       run: |
-      mvn package -DskipTests
-      mkdir build
-      cp target/*.jar build/cadastros.jar
+        mvn package -DskipTests
+        mkdir build
+        cp target/*.jar build/cadastros.jar
       
     - name: Gera Artefato
       uses:  actions/upload-artifact@v4
