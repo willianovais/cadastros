@@ -35,7 +35,7 @@ jobs:
 
     - name: Gera Tag Versao
       run: |
-        echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        echo "::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
       id: get_version
 
   build_docker:
