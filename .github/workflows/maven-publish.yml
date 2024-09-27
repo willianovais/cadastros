@@ -6,7 +6,7 @@ name: Build App Teste
 on: push
 
 jobs:
-  Build_Jar:
+  build_jar:
 
     runs-on: ubuntu-latest
     permissions:
@@ -33,8 +33,8 @@ jobs:
         name: Package
         path: build
 
-  docker:
-    needs: buildapp
+  build_docker:
+    needs: build_jar
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
