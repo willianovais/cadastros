@@ -6,7 +6,7 @@ name: Build App Teste
 on: push
 
 jobs:
-  Build Jar:
+  Build_Jar:
 
     runs-on: ubuntu-latest
     permissions:
