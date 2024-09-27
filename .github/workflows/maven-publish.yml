@@ -33,6 +33,11 @@ jobs:
         name: Package
         path: build
 
+    - name: Gera Tag Versao
+      run: |
+        echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+      id: get_version
+
   build_docker:
     needs: build_jar
     runs-on: ubuntu-latest
@@ -55,11 +60,6 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
-
-      - name: Gera Tag Versao
-        run: |
-          echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-        id: get_version
 
       - name: Build and push
         uses: docker/build-push-action@v6
